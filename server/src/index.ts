@@ -8,8 +8,7 @@ const port = process.env.PORT || 3001;
 
 app.use(express.json());
 
-const mongoURI: string =
-  "mongodb+srv://csjshawn:ON9xMag9XMyr8jZu@personalfinancetracker.vwe6y.mongodb.net/";
+const mongoURI = import.meta.env.MONGO_URI;
 
 mongoose
   .connect(mongoURI)
