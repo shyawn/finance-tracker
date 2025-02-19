@@ -33,9 +33,9 @@ mongoose
 app.use("/financial-records", financialRecordRouter);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+  app.use(express.static(path.join(path.resolve(), "../client/dist")));
   app.get("*", (req: any, res: any) => {
-    res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+    res.sendFile(path.join(path.resolve(), "../client", "dist", "index.html"));
   });
 }
 
