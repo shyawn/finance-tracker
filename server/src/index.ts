@@ -32,12 +32,12 @@ mongoose
 
 app.use("/financial-records", financialRecordRouter);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(path.resolve(), "../client/dist")));
-  app.get("*", (req: any, res: any) => {
-    res.sendFile(path.join(path.resolve(), "../client", "dist", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(path.resolve(), "../client/dist")));
+//   app.get("*", (req: any, res: any) => {
+//     res.sendFile(path.join(path.resolve(), "../client", "dist", "index.html"));
+//   });
+// }
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`Server Running on Port ${port}`);
