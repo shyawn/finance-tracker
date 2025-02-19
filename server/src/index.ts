@@ -6,11 +6,13 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const financialRecordRouter = require("./routes/financial-records");
 const cors = require("cors");
+const path = require("path");
 
 // const app: Express = express();
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
+const _dirname = path.resolve();
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +26,13 @@ mongoose
   .catch((err: any) => console.error("Failed to connect to mongoDb: ", err));
 
 app.use("/financial-records", financialRecordRouter);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(_dirname, "../client/dist")));
+  app.get("*", (req: any, res: any) => {
+    res.sendFile(path.join(_dirname, "../client", "dist", "index.html"));
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server Running on Port ${port}`);
