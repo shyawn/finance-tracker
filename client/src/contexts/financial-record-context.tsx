@@ -32,7 +32,9 @@ export const FinancialRecordsProvider = ({
   const fetchRecords = async () => {
     if (!user) return;
     const response = await fetch(
-      `http://localhost:3001/financial-records/getAllByUserID/${user.id}`
+      `${
+        import.meta.env.MODE === "development" ? "http://localhost:3001/" : "/"
+      }financial-records/getAllByUserID/${user.id}`
     );
     if (response.ok) {
       const records = await response.json();
@@ -46,13 +48,18 @@ export const FinancialRecordsProvider = ({
   }, [user]);
 
   const addRecord = async (record: FinancialRecord) => {
-    const response = await fetch("http://localhost:3001/financial-records", {
-      method: "POST",
-      body: JSON.stringify(record),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${
+        import.meta.env.MODE === "development" ? "http://localhost:3001/" : "/"
+      }financial-records`,
+      {
+        method: "POST",
+        body: JSON.stringify(record),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     try {
       if (response.ok) {
@@ -64,7 +71,9 @@ export const FinancialRecordsProvider = ({
 
   const updateRecord = async (id: string, newRecord: FinancialRecord) => {
     const response = await fetch(
-      `http://localhost:3001/financial-records/${id}`,
+      `${
+        import.meta.env.MODE === "development" ? "http://localhost:3001/" : "/"
+      }financial-records/${id}`,
       {
         method: "PUT",
         body: JSON.stringify(newRecord),
@@ -92,7 +101,9 @@ export const FinancialRecordsProvider = ({
 
   const deleteRecord = async (id: string) => {
     const response = await fetch(
-      `http://localhost:3001/financial-records/${id}`,
+      `${
+        import.meta.env.MODE === "development" ? "http://localhost:3001/" : "/"
+      }financial-records/${id}`,
       {
         method: "DELETE",
       }
