@@ -12,7 +12,7 @@ const path = require("path");
 // const app: Express = express();
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT;
 // const __dirname = path.resolve();
 // import { fileURLToPath } from "url";
 
